@@ -67,9 +67,9 @@ func (app *LineCounterApp) CountLines(folderPath string) error {
 		if err != nil {
 			return err
 		}
-		if info.IsDir() && info.Name() == "node_modules" {
-			return filepath.SkipDir
-		}
+	if info.IsDir() && (info.Name() == "node_modules" || info.Name() == ".git") {
+		return filepath.SkipDir
+	}
 		if !info.IsDir() {
 			ext := filepath.Ext(path)
 			content, err := ioutil.ReadFile(path)
